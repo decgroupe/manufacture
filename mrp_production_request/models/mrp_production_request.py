@@ -207,6 +207,15 @@ class MrpProductionRequest(models.Model):
         return res
 
     @api.multi
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        default = self._create_sequence(default)
+        production_request_id = super().copy(default)
+        return production_request_id
+
+    @api.multi
     def button_to_approve(self):
         self.write({'state': 'to_approve'})
         return True
