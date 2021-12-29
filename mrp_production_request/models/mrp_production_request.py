@@ -95,15 +95,18 @@ class MrpProductionRequest(models.Model):
     manufactured_qty = fields.Float(
         string="Quantity in Manufacturing Orders",
         compute="_compute_manufactured_qty", store=True, readonly=True,
+        compute_sudo=True,
         digits=dp.get_precision('Product Unit of Measure'),
         help="Sum of the quantities in Manufacturing Orders (in any state).")
     done_qty = fields.Float(
         string="Quantity Done", store=True, readonly=True,
+        compute_sudo=True,
         compute="_compute_manufactured_qty",
         digits=dp.get_precision('Product Unit of Measure'),
         help="Sum of the quantities in all done Manufacturing Orders.")
     pending_qty = fields.Float(
         string="Pending Quantity", compute="_compute_manufactured_qty",
+        compute_sudo=True,
         store=True, digits=dp.get_precision('Product Unit of Measure'),
         readonly=True,
         help="Quantity pending to add to Manufacturing Orders "
