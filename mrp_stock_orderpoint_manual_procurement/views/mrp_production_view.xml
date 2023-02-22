@@ -9,9 +9,12 @@
         <field name="model">mrp.production</field>
         <field name="inherit_id" ref="mrp.mrp_production_form_view" />
         <field name="arch" type="xml">
-            <field name="location_dest_id" position="after">
+            <xpath
+                expr="//page[@name='miscellaneous']//field[@name='location_dest_id']"
+                position="after"
+            >
                 <field name="requested_by" />
-            </field>
+            </xpath>
         </field>
     </record>
 </odoo>
