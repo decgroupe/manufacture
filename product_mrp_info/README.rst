@@ -64,8 +64,9 @@ Authors
 Contributors
 ------------
 
--  Lois Rilo <lois.rilo@forgeflow.com>
--  Sudhir Arya <sudhir@erpharbor.com>
+- Lois Rilo <lois.rilo@forgeflow.com>
+- Sudhir Arya <sudhir@erpharbor.com>
+- Fabian Semal <fabian@digital-serenity.net>
 
 Maintainers
 -----------

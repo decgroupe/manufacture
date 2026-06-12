@@ -14,14 +14,12 @@ class ProductTemplate(models.Model):
     )
 
     def _compute_mo_count(self):
-        read_group_res = self.env["mrp.production"].read_group(
+        read_group_res = self.env["mrp.production"]._read_group(
             [("product_id", "in", self.mapped("product_variant_ids").ids)],
             ["product_id"],
-            ["product_id"],
+            ["__count"],
         )
-        mapped_data = {
-            data["product_id"][0]: data["product_id_count"] for data in read_group_res
-        }
+        mapped_data = {data[0].id: data[1] for data in read_group_res}
         for rec in self:
             count = 0
             for variant in rec.mapped("product_variant_ids"):
@@ -47,12 +45,10 @@ class ProductProduct(models.Model):
     )
 
     def _compute_mo_count(self):
-        read_group_res = self.env["mrp.production"].read_group(
-            [("product_id", "in", self.ids)], ["product_id"], ["product_id"]
+        read_group_res = self.env["mrp.production"]._read_group(
+            [("product_id", "in", self.ids)], ["product_id"], ["__count"]
         )
-        mapped_data = {
-            data["product_id"][0]: data["product_id_count"] for data in read_group_res
-        }
+        mapped_data = {data[0].id: data[1] for data in read_group_res}
         for product in self:
             product.mo_count = mapped_data.get(product.id, 0)
 
